@@ -1,0 +1,6 @@
+Date	| Time		| Change	
+----------------------------------------------------------------------------
+5/8/17	| 6:26pm	| Created project with basic makefile
+5/8/17	| 6:30pm	| Started gathering requirements and considering designs
+5/8/17  | 7:00pm    | Settled on a final design
+5/8/17	| 7:45pm	| Linked in gtest and created makefile to run the tests
