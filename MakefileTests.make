@@ -11,10 +11,12 @@ CPPFLAGS = -DDebug \
 
 SRCS = \
 	DocumentParser/DocumentParser.Business/DocumentParser.Business.Engine/StringMatchMethod.cpp \
+	DocumentParser/DocumentParser.Business/DocumentParser.Business.Engine/RegExMethod.cpp \
+	DocumentParser/DocumentParser.Business/DocumentParser.Business.Engine/IndexedMethod.cpp \
 	DocumentParser/DocumentParser.Business/DocumentParser.Business.Engine.Tests/SampleTest.cpp \
 	DocumentParser/DocumentParser.Business/DocumentParser.Business.Engine.Tests/Main.cpp
 
-OBJS = $(patsubst %.cpp,%.o,$(SRCS))
+OBJS = $(addprefix obj/, $(patsubst %.cpp,%.o,$(SRCS)))
 
 targetTestName = CodingChallengeTests
 
@@ -26,10 +28,11 @@ all: $(OBJS)
 		-o $(targetTestName) $(OBJS) \
 		${GTEST_DIR}/googletest/libgtest.a
 
-$(OBJS): %.o: %.cpp
+$(OBJS): obj/%.o: %.cpp
 	@echo Compiling $<
 	@mkdir -p $(dir $@)
 	$(CC) -c $(CPPFLAGS) $< -o $@
 
 clean:
-	rm -rf *.o *.exe
+	rm -rf *.exe
+	rm -rf obj/*

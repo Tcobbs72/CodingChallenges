@@ -1,28 +1,36 @@
-GTEST_DIR = ThirdParty/googletest/
-
 CC = g++
 
 CPPFLAGS = -DDebug \
 		   -g \
-		   -std=c++11 
+		   -std=gnu++0x \
+		   -I.
 
-LFLAGS = -Wall $(DEBUG)
+SRCS = \
+	DocumentParser/DocumentParser.Infrastructure/Document.cpp \
+	DocumentParser/DocumentParser.Business/DocumentParser.Business.Service/ConfigLoader.cpp \
+	DocumentParser/DocumentParser.Business/DocumentParser.Business.Service/DocumentLoader.cpp \
+	DocumentParser/DocumentParser.Business/DocumentParser.Business.Engine/DocumentParser.cpp \
+	DocumentParser/DocumentParser.Business/DocumentParser.Business.Engine/StringMatchMethod.cpp \
+	DocumentParser/DocumentParser.Business/DocumentParser.Business.Engine/RegExMethod.cpp \
+	DocumentParser/DocumentParser.Business/DocumentParser.Business.Engine/IndexedMethod.cpp \
+	Main.cpp
 
-OBJS = Main.o
-SRCS = Main.cpp
+OBJS = $(addprefix obj/, $(patsubst %.cpp,%.o,$(SRCS)))
 
 targetName = CodingChallenge
 
 .PHONY: all
 
-all: $(targetName)
-
-$(targetName) : $(OBJS)
+all: $(OBJS)
 	@echo Creating CodingChallenge Executable
-	$(CC) $(LFLAGS) $(OBJS) -o $(targetName)
+	$(CC) -Wall -g \
+		-o $(targetName) $(OBJS)
 
-Main.o: Main.cpp
-	$(CC) $(CPPFLAGS) Main.cpp
+$(OBJS): obj/%.o: %.cpp
+	@echo Compiling $<
+	@mkdir -p $(dir $@)
+	$(CC) -c $(CPPFLAGS) $< -o $@
 
 clean:
-	rm -rf *.o *.exe
+	rm -rf *.exe
+	rm -rf obj/*

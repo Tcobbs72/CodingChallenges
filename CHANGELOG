@@ -4,3 +4,8 @@ Date	| Time		| Change
 5/8/17	| 6:30pm	| Started gathering requirements and considering designs
 5/8/17  | 7:00pm    | Settled on a final design
 5/8/17	| 7:45pm	| Linked in gtest and created makefile to run the tests
+5/9/17	| 6:00pm	| Created classes for different search methods
+5/9/17	| 6:05pm	| Created some failing unit tests to ensure correctness
+5/9/17	| 6:10pm	| Modified makefile to put .o in separate directory
+5/9/17	| 8:00pm	| Added Config and Document loader classes
+5/9/17	| 9:00pm	| Created DocumentParserController main class
