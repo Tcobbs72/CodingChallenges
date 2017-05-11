@@ -1,4 +1,7 @@
 #include <memory>
+#include <iostream>
+#include <string>
+#include <unistd.h>
 
 #include "DocumentParser/DocumentParser.Infrastructure/NamespaceAliases.h"
 #include "DocumentParser/DocumentParser.Business/DocumentParser.Business.Engine/DocumentParser.h"
@@ -9,37 +12,23 @@
 
 int main(int argc, char** argv)
 {
-	// std::string searchTerm;
-	// std::cout << "Enter the search term: ";
-	// getline(std::cin, searchTerm);
-
-	// if(searchTerm.empty())
-	// {
-	// 	std::cout << "Invalid search term. Must not be empty." << std::endl;
-	// 	return 1;
-	// }
-
-	// int searchMethod;
-	// std::cout << "Search Method: 1) String Match 2) Regular Expression 3) Indexed" << std::endl;
-	// std::cin >> searchMethod;
-
-	// if(std::cin.fail())
-	// {
-	// 	std::cin.clear();
-	// 	std::cout << "Invalid search method. Options are 1) String Match 2) Regular Expression 3) Indexed" << std::endl;
-	// 	return 1;
-	// }
-
-	// std::cout << "You chose: " << searchTerm << " " << searchMethod << std::endl;
+	char cCurrentPath[256];
+	if(!getcwd(cCurrentPath, sizeof(cCurrentPath)))
+	{
+		std::cout << "Failed to get current directory\n";
+		return 1;
+	}
+	cCurrentPath[sizeof(cCurrentPath) - 1] = '\0';
+	std::string documentPath = std::string(cCurrentPath) + "/sample_text/";
 
 	DPBS::IConfigLoader* configLoader = new DPBS::ConfigLoader();
-	DPBS::IDocumentLoader* documentLoader = new DPBS::DocumentLoader();
+	DPBS::IDocumentLoader* documentLoader = new DPBS::DocumentLoader(documentPath);
 
-	auto parser = DPBE::DocumentParserController(configLoader, documentLoader);
-	parser.Run();
+	auto parser = DPBE::DocumentParserController(configLoader);
+	parser.ParseDocuments(documentLoader);
 
 	delete configLoader;
 	delete documentLoader; 
-	
+
 	return 0;
 }

@@ -5,9 +5,12 @@
 namespace DocumentParser { namespace Business { namespace Engine {
 	class RegExMethod : public ISearchMethod
 	{
-		public:
-			RegExMethod();
-			~RegExMethod();
-			bool TryGetNextOccurence(int& out);
+	private:
+		std::string _content;
+	public:
+		RegExMethod();
+		~RegExMethod();
+		void Initialize(DPI::Document* const document);
+		int FindOccurences(const std::string& searchString);
 	};
 }}}

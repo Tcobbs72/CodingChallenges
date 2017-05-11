@@ -6,14 +6,37 @@ using DocumentParser::Business::Engine::IndexedMethod;
 
 IndexedMethod::IndexedMethod()
 {
-	std::cout << "CREATING INDEXED\n";
 }
 
 IndexedMethod::~IndexedMethod()
 {
 }
 
-bool IndexedMethod::TryGetNextOccurence(int& out)
+void IndexedMethod::Initialize(DPI::Document* const document)
 {
-	return false;
+	this->_occurenceMap.clear();
+	std::string content = std::string(document->GetContent());
+	for(auto start = content.begin(); start != content.end(); ++start)
+	{
+		for(auto end = start; end != content.end(); ++end)
+		{
+			if(end != start)
+			{
+				std::string key = std::string(start, end);
+				if(this->_occurenceMap.find(key) == this->_occurenceMap.end())
+				{
+					this->_occurenceMap[key] = 1;
+				}
+				else
+				{
+					this->_occurenceMap[key] += 1;
+				}
+			}
+		}
+	}
+}
+
+int IndexedMethod::FindOccurences(const std::string& searchString)
+{
+	return this->_occurenceMap.find(searchString) == this->_occurenceMap.end() ? 0 : this->_occurenceMap[searchString];
 }

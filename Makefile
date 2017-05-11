@@ -6,7 +6,6 @@ CPPFLAGS = -DDebug \
 		   -I.
 
 SRCS = \
-	DocumentParser/DocumentParser.Infrastructure/Document.cpp \
 	DocumentParser/DocumentParser.Business/DocumentParser.Business.Service/ConfigLoader.cpp \
 	DocumentParser/DocumentParser.Business/DocumentParser.Business.Service/DocumentLoader.cpp \
 	DocumentParser/DocumentParser.Business/DocumentParser.Business.Engine/DocumentParser.cpp \

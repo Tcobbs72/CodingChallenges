@@ -1,11 +1,13 @@
-Date	| Time		| Change	
-----------------------------------------------------------------------------
-5/8/17	| 6:26pm	| Created project with basic makefile
-5/8/17	| 6:30pm	| Started gathering requirements and considering designs
-5/8/17  | 7:00pm    | Settled on a final design
-5/8/17	| 7:45pm	| Linked in gtest and created makefile to run the tests
-5/9/17	| 6:00pm	| Created classes for different search methods
-5/9/17	| 6:05pm	| Created some failing unit tests to ensure correctness
-5/9/17	| 6:10pm	| Modified makefile to put .o in separate directory
-5/9/17	| 8:00pm	| Added Config and Document loader classes
-5/9/17	| 9:00pm	| Created DocumentParserController main class
+Date	| Time		| Change												| Difficulties
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+5/8/17	| 6:26pm	| Created project with basic makefile					| N/A
+5/8/17	| 6:30pm	| Started gathering requirements and considering designs| N/A
+5/8/17  | 7:00pm    | Settled on a final designs 							| N/A
+5/8/17	| 7:45pm	| Linked in gtest and created makefile to run the tests	| Had to learn how to link in gtest and include in make
+5/9/17	| 6:00pm	| Created classes for different search methods 			| N/A
+5/9/17	| 6:10pm	| Modified makefile to put .o in separate directory 	| Had to research how to do this 
+5/9/17	| 8:00pm	| Added Config and Document loader classes 				| N/A
+5/9/17	| 9:00pm	| Created DocumentParserController main class 			| N/A
+5/10/17	| 6:30pm	| Added logic to load files for parsing 				| Had to refresh on c functions to load files
+5/10/17	| 7:15pm	| Implemented StringMatch search method 				| Had minor bug when splitting words that was adding additional character
+5/10/17	| 7:40pm 	| Implemented RegEx search methods 						| Had to re-learn how to do regex in C++
