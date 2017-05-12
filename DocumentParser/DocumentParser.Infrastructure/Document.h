@@ -22,7 +22,14 @@ namespace DocumentParser { namespace Infrastructure {
 
 		AddLine(std::string line)
 		{
-			this->_content = this->_content + "\n" + line;
+			if(this->_content.empty())
+			{
+				this->_content = line;
+			}
+			else
+			{
+				this->_content = this->_content + "\n" + line;
+			}
 		}
 
 		inline std::string GetName() { return this->_fileName; }

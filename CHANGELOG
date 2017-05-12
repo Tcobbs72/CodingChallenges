@@ -10,4 +10,5 @@ Date	| Time		| Change												| Difficulties
 5/9/17	| 9:00pm	| Created DocumentParserController main class 			| N/A
 5/10/17	| 6:30pm	| Added logic to load files for parsing 				| Had to refresh on c functions to load files
 5/10/17	| 7:15pm	| Implemented StringMatch search method 				| Had minor bug when splitting words that was adding additional character
-5/10/17	| 7:40pm 	| Implemented RegEx search methods 						| Had to re-learn how to do regex in C++
+5/10/17	| 7:40pm 	| Implemented RegEx search method 						| Had to re-learn how to do regex in C++
+5/10/17 | 8:15pm	| Implemented Naive Indexed search methods 				| N/A

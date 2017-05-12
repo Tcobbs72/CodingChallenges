@@ -13,5 +13,6 @@ namespace DocumentParser { namespace Business { namespace Engine {
 		~IndexedMethod();
 		void Initialize(DPI::Document* const document);
 		int FindOccurences(const std::string& searchString);
+		inline std::unordered_map<std::string, int> GetOccurenceMap() const { return this->_occurenceMap; }
 	};
 }}}

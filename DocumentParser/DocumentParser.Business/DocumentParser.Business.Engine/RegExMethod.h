@@ -12,5 +12,6 @@ namespace DocumentParser { namespace Business { namespace Engine {
 		~RegExMethod();
 		void Initialize(DPI::Document* const document);
 		int FindOccurences(const std::string& searchString);
+		inline std::string GetContent() const { return this->_content; }
 	};
 }}}
