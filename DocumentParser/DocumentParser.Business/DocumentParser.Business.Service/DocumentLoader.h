@@ -19,5 +19,6 @@ namespace DocumentParser { namespace Business { namespace Service {
 		DocumentLoader(std::string directory);
 		~DocumentLoader();
 		inline std::vector<DPI::Document*> GetDocuments() { return this->_documents; }
+		void CleanupDocuments();
 	};
 }}}

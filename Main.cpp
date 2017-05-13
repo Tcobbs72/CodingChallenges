@@ -27,6 +27,8 @@ int main(int argc, char** argv)
 	auto parser = DPBE::DocumentParserController(configLoader);
 	parser.ParseDocuments(documentLoader);
 
+	documentLoader->CleanupDocuments();
+
 	delete configLoader;
 	delete documentLoader; 
 

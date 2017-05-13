@@ -1,0 +1,56 @@
+Thoughts on the performance of the code...
+
+After experimenting a little bit with the performance of the 3 different search methods
+I found that StringMatch and Indexed are the most performant given a certain set of
+circumstances. Given a small number of requests the StringMatch and RegEx method both
+out perform the Indexed method because it does not spend the time pre-processing and
+finding all possible phrases/occurences. As the number of requests rises the RegEx
+method slows down exponentially. I believe this is in part to all of the extra overhead
+that RegEx has when searching for a phrase. While the performance of RegEx decreases
+we see the performance of the Indexed method increase exponentially because lookup time
+is O(1) for each request. StringMatch method continues to compete but falls off.
+
+Rounded averages of 10 runs at each level
+
+            | 10000 req | 2000000 req | 10000000 req |			
+------------|-----------|-------------|--------------|
+StringMatch | 21ms      | 4000ms      | 18000ms      |
+RegEx       | 14000ms   | Timed out   | N/A          |
+Indexed     | 1450ms    | 3100ms      | 9000ms       |
+
+I found that at 10,000 requests on a 1400 byte file that the StringMatch method held
+a sizeable lead clocking in at 21ms while the Indexed method came in second at 1450ms
+and RegEx in last at 14000ms. When I upped the number of requests to 2,000,000 while
+keeping file size the same we see Indexed method takeover clocking in at 3100ms. 
+StringMatch method falls behind at 4000ms and RegEx method didnt finish after almost
+5 minutes so killed the process. Finally after going up to 10,000,000 requests we
+see Indexed method start to pull away at 9000ms and StringMatch method a little
+over 18000ms. 
+
+Looking at these numbers we see that it took the Indexed method 1650ms to process
+1.9 million requests and 5900ms to process 8 million requests. This means we are 
+processing requests at a rate of about 0.80 microseconds/request. This also means
+that if it took 1450ms to process 10000 requests and (0.8 * 10000 = 8000) micro 
+or 8ms was used to look up the requests that it took is nearly 1442ms to pre-process
+the file and build our map. That number will grow exponentially as the file gets 
+bigger and we also run into memory concerns because the number of keys in our map
+will also start to grow exponentially. 
+
+Thoughts on scalability...
+
+If we were able to multi-thread the pre-processing of the file in Indexed mode
+I believe we would see a significant performance improvement. Since StringMatch
+method is O(n) it would be more difficult to multi-thread the processing but
+if we were able to multi-thread each incoming request to happen in parallel we
+would see a performance boost there as well (same with RegEx mode). There is also
+potential for machine learning here to analyze our searches and learn from previous runs.
+For example in StringMatch mode if we scan the file once then we can come in with a 
+new request with knowledge of what the file looks like from a previous run and jump
+to spots in the file where we know the phrase is more likely to exist.
+
+If we had access to something like an FPGA board we could forward the pre-processing
+of the file in Indexed mode through the FPGA and performance boosts would be immense.
+
+Also the code itself could be optimized to use more performant data structures 
+(i.e. char* over std::string) that have less overhead to maintain. 
+

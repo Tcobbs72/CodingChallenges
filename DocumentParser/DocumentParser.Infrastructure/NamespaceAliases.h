@@ -15,6 +15,10 @@ namespace DocumentParser {
 			class DocumentLoader;
 			class ConfigLoader;
 		}
+		namespace Mocks {
+			class MockDocumentLoader;
+			class MockConfigLoader;
+		}
 	}
 	namespace Infrastructure {
 		class Document;
@@ -23,4 +27,5 @@ namespace DocumentParser {
 
 namespace DPBE = DocumentParser::Business::Engine;
 namespace DPBS = DocumentParser::Business::Service;
+namespace DPBM = DocumentParser::Business::Mocks;
 namespace DPI = DocumentParser::Infrastructure;

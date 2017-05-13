@@ -9,5 +9,6 @@ namespace DocumentParser { namespace Business { namespace Service {
 	public:
 		virtual ~IDocumentLoader() {}
 		virtual std::vector<DPI::Document*> GetDocuments() = 0;
+		virtual void CleanupDocuments() = 0;
 	};
 }}}

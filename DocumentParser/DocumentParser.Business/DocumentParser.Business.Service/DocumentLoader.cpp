@@ -61,3 +61,11 @@ int DocumentLoader::IsDirectory(const char* path)
     }
     return S_ISDIR(statbuf.st_mode);
 }
+
+void DocumentLoader::CleanupDocuments()
+{
+	for(auto document : this->_documents)
+	{
+		delete document;
+	}
+}

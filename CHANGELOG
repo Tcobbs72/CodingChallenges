@@ -12,3 +12,7 @@ Date	| Time		| Change												| Difficulties
 5/10/17	| 7:15pm	| Implemented StringMatch search method 				| Had minor bug when splitting words that was adding additional character
 5/10/17	| 7:40pm 	| Implemented RegEx search method 						| Had to re-learn how to do regex in C++
 5/10/17 | 8:15pm	| Implemented Naive Indexed search methods 				| N/A
+5/11/17	| 7:00pm	| Wrote more unit tests 								| Had to compile the gmock archive and link it in
+5/11/17 | 8:00pm 	| Did some research on performance tests 				| N/A
+5/12/17 | 6:15pm 	| Cleaned up the code 									| N/A
+5/12/17 | 7:00pm 	| Wrote up results and completed project 				| N/A

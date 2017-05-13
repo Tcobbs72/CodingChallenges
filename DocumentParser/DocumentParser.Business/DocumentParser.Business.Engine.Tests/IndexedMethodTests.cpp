@@ -104,7 +104,7 @@ std::string IndexedMethodTests::GenerateRandomString()
     return randomString;
 }
 
-TEST_F(IndexedMethodTests, PerformanceTest)
+TEST_F(IndexedMethodTests, PerformanceTest10Million)
 {
 	std::string content = 
 		"test document. this document has more content. the reason is because i want to test performance! "
@@ -127,6 +127,66 @@ TEST_F(IndexedMethodTests, PerformanceTest)
 	delete document;
 
 	const int trials = 10000000;
+	for(int i = 0; i < trials; i++)
+	{
+		std::string searchString = this->GenerateRandomString();
+		this->_searchMethod->FindOccurences(searchString);
+	}
+}
+
+TEST_F(IndexedMethodTests, PerformanceTest2Million)
+{
+	std::string content = 
+		"test document. this document has more content. the reason is because i want to test performance! "
+		"To do so i am writing a longer document to parse through in hopes to gain a greater understanding "
+		"of which search method is fastest. I grew up in Eagan, MN which is a suburb of St. Paul. While "
+		"attending high school I had no idea what I wanted to do but I knew that I liked numbers and science. "
+		"With that knowledge I applied to a couple schools and ended up choosing Iowa State University because "
+		"of it well-known engineering department and the beautiful campus. During my freshman year I attended "
+		"a course that brought in a different type of engineer and eventually decided to follow the path of "
+		"Computer Engineering. After my first year I found that I did not carry as much passion for hardware "
+		"as I did for software so I changed my major to Software Engineering. I attained some great experience "
+		"through multiple internships and during my senior year I received multiple offers for full-time "
+		"employment. It was an incredibly hard decision but ended up choosing to work at Belvedere Trading in "
+		"Chicago despite not knowing anyone in Chicago and not understanding much about trading. It was scary "
+		"but ended up being the one of the best decisions I have made. I am now moving back to Minneapolis due "
+		"to some external forces but appreciate everything that Chicago and Belvedere has done for me.";
+	std::string name = "Test.txt";
+	DPI::Document* document = this->GenerateDocument(name, content);
+	this->_searchMethod->Initialize(document);
+	delete document;
+
+	const int trials = 2000000;
+	for(int i = 0; i < trials; i++)
+	{
+		std::string searchString = this->GenerateRandomString();
+		this->_searchMethod->FindOccurences(searchString);
+	}
+}
+
+TEST_F(IndexedMethodTests, PerformanceTest10Thousand)
+{
+	std::string content = 
+		"test document. this document has more content. the reason is because i want to test performance! "
+		"To do so i am writing a longer document to parse through in hopes to gain a greater understanding "
+		"of which search method is fastest. I grew up in Eagan, MN which is a suburb of St. Paul. While "
+		"attending high school I had no idea what I wanted to do but I knew that I liked numbers and science. "
+		"With that knowledge I applied to a couple schools and ended up choosing Iowa State University because "
+		"of it well-known engineering department and the beautiful campus. During my freshman year I attended "
+		"a course that brought in a different type of engineer and eventually decided to follow the path of "
+		"Computer Engineering. After my first year I found that I did not carry as much passion for hardware "
+		"as I did for software so I changed my major to Software Engineering. I attained some great experience "
+		"through multiple internships and during my senior year I received multiple offers for full-time "
+		"employment. It was an incredibly hard decision but ended up choosing to work at Belvedere Trading in "
+		"Chicago despite not knowing anyone in Chicago and not understanding much about trading. It was scary "
+		"but ended up being the one of the best decisions I have made. I am now moving back to Minneapolis due "
+		"to some external forces but appreciate everything that Chicago and Belvedere has done for me.";
+	std::string name = "Test.txt";
+	DPI::Document* document = this->GenerateDocument(name, content);
+	this->_searchMethod->Initialize(document);
+	delete document;
+
+	const int trials = 10000;
 	for(int i = 0; i < trials; i++)
 	{
 		std::string searchString = this->GenerateRandomString();
